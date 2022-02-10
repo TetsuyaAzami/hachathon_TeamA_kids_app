@@ -1,0 +1,139 @@
+@charset "UTF-8";
+body div.container:first-of-type {
+  margin-top: 52px;
+}
+
+.user-infomation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 80px;
+  background-color: #fff;
+  color: #0d6efd;
+  font-weight: bold;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.user-infomation .user-profile img {
+  margin-right: 8px;
+}
+
+.user-infomation .user-profile span {
+  line-height: 5;
+}
+
+.user-infomation .user-point img {
+  margin-right: 8px;
+}
+
+.user-infomation .user-point span {
+  line-height: 5;
+}
+
+.main-contents {
+  margin-top: 24px;
+}
+
+.contents-category {
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 60px;
+  width: calc(100% - 30px - 30px);
+  margin-left: 30px;
+  padding: 12px;
+  background-color: #dd451b;
+  text-align: center;
+  font-weight: bold;
+  color: #fff;
+}
+
+.contents-category span {
+  margin-right: 24px;
+}
+
+h2:before {
+  position: absolute;
+  top: 0;
+  left: -30px;
+  content: "";
+  border-width: 30px 30px 30px 0;
+  border-style: solid;
+  border-color: transparent #dd451b transparent transparent;
+}
+
+h2:after {
+  position: absolute;
+  top: 0;
+  right: -30px;
+  content: "";
+  border-width: 30px 0 30px 30px;
+  border-style: solid;
+  border-color: transparent #dd451b transparent #dd451b;
+}
+
+.cards {
+  margin-top: 24px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+}
+
+.card .card-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: orange;
+}
+
+.card .card-body .card-title {
+  display: block;
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.card .img-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #fff;
+}
+
+.card .img-wrapper img {
+  display: block;
+  width: 100%;
+  /*任意の横幅を指定*/
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.card .fa-check-circle {
+  position: absolute;
+  font-size: 5rem;
+  color: green;
+  left: 100%;
+  top: 100%;
+  -webkit-transform: translate(-60%, -60%);
+          transform: translate(-60%, -60%);
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 40px;
+}
+/*# sourceMappingURL=home.css.map */

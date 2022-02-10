@@ -1,0 +1,58 @@
+//共通
+html {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+.container {
+  //コンテナ共通で使います
+  padding: 12px;
+}
+
+.btn {
+  display: block;
+  font-weight: bold;
+  color: #00ccff;
+}
+
+//個別設定
+body {
+  min-height: 100vh;
+  background-color: rgb(165, 230, 234);
+}
+
+//header
+.container-fluid {
+  padding: 0 24px;
+  height: 50px;
+}
+.header-user-profile {
+  img {
+    margin-right: 8px;
+  }
+  color: #fff;
+  font-weight: bold;
+}
+.header-nav-list {
+  margin-bottom: 0;
+  display: flex;
+  .sign-up-button {
+    color: #fff;
+  }
+  .sign-in-button {
+    color: #fff;
+  }
+  .fas {
+    margin-right: 8px;
+    line-height: 40px;
+  }
+  li {
+    line-height: 40px;
+    margin-left: 24px;
+  }
+}
