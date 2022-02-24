@@ -33,6 +33,25 @@
     </div>
   </main>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      course: null,
+    };
+  },
+  created() {
+    this.axios
+      .get("http://localhost:8080/courses/1")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+};
+</script>
 
 <style scoped lang="scss">
 .contents {
@@ -57,10 +76,10 @@
     padding: 0px 12px;
   }
   .question-box {
-  margin: 24px 0px;
-  padding: 24px 24px;
-  text-align: center;
-  background-color: #fff;
+    margin: 24px 0px;
+    padding: 24px 24px;
+    text-align: center;
+    background-color: #fff;
   }
   .answer-box {
     margin-bottom: 18px;

@@ -2,8 +2,8 @@
   <HeaderVue></HeaderVue>
   <!-- <TopPageVue></TopPageVue> -->
   <!-- <CreateAccountVue></CreateAccountVue> -->
-  <!-- <HomeVue></HomeVue> -->
-  <QuizVue></QuizVue>
+  <HomeVue></HomeVue>
+  <!-- <QuizVue></QuizVue> -->
   <FooterVue></FooterVue>
 </template>
 
@@ -11,17 +11,17 @@
 import HeaderVue from "./components/Header.vue";
 // import TopPageVue from "./pages/TopPage.vue";
 // import CreateAccountVue from "./pages/CreateAccount.vue";
-// import HomeVue from "./pages/Home.vue";
-import QuizVue from "./pages/Quiz.vue"
+import HomeVue from "./pages/Home.vue";
+// import QuizVue from "./pages/Quiz.vue";
 import FooterVue from "./components/Footer.vue";
 export default {
   name: "App",
   components: {
     HeaderVue,
     // TopPageVue,
-    // createAccountVue,
-    // HomeVue,
-    QuizVue,
+    // CreateAccountVue,
+    HomeVue,
+    // QuizVue,
     FooterVue,
   },
 };
@@ -34,6 +34,9 @@ export default {
 }
 html {
   box-sizing: border-box;
+}
+a {
+  text-decoration: none;
 }
 #app {
   min-height: 100vh;
