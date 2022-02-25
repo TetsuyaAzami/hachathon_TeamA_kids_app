@@ -1,9 +1,9 @@
 <template>
   <!-- header navigation -->
   <header>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark header-nav-color">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">KIDS APP TITLE</span>
+        <span class="navbar-brand mb-0 h1">てっくらんど</span>
         <ul class="header-nav-list">
           <li class="sign-up-button"><fa class="fas fa-sign-in" />会員登録</li>
           <li class="sign-in-button">
@@ -15,11 +15,22 @@
   </header>
 </template>
 <script></script>
+
 <style scoped lang="scss">
 //header
 .container-fluid {
   padding: 0 24px;
   height: 50px;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  @media only screen and (max-width: 428px) {
+    font-size: 1.2rem;
+  }
+}
+.header-nav-color {
+  background-color: #0688d2;
 }
 .header-user-profile {
   img {
@@ -31,6 +42,7 @@
 .header-nav-list {
   margin-bottom: 0;
   display: flex;
+  font-weight: bolder;
   .sign-up-button {
     color: #fff;
   }
@@ -44,6 +56,9 @@
   li {
     line-height: 40px;
     margin-left: 24px;
+    @media only screen and (max-width: 428px) {
+      margin-left: 12px;
+    }
   }
 }
 </style>
