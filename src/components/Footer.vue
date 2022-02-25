@@ -10,11 +10,12 @@ export default {
 </script>
 <style scoped lang="scss">
 footer {
-  height: 100px;
-  background-color: #8a8a8c;
+  width: 100%;
+  height: 70px;
+  background-color: #04294f;
   text-align: center;
   p {
-    line-height: 100px;
+    line-height: 70px;
     color: #fff;
   }
 }

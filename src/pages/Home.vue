@@ -8,7 +8,7 @@
             alt="ユーザープロフィールの画像です"
             width="48px"
           />
-          <span>ニックネーム</span>
+          <span id="user">ニックネーム</span>
         </div>
         <div class="user-point">
           <img
@@ -26,61 +26,45 @@
         ><span>インターネットの仕組み</span>
       </h2>
       <div class="cards">
-        <article class="card">
-          <div class="card-body">
-            <h5 class="card-title">インターネット</h5>
-          </div>
-          <div class="img-wrapper">
-            <img
-              src="@/assets/image/q_1.png"
-              class="card-img-bottom"
-              alt="〇〇の画像です"
-            />
-          </div>
-          <i class="fas fa-check-circle"></i>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h5 class="card-title">リクエストとレスポンス</h5>
-          </div>
-          <div class="img-wrapper">
-            <img
-              src="@/assets/image/q_2.png"
-              class="card-img-bottom"
-              alt="〇〇の画像です"
-            />
-          </div>
-          <i class="fas fa-check-circle"></i>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h5 class="card-title">HTTP</h5>
-          </div>
-          <div class="img-wrapper">
-            <img
-              src="@/assets/image/q_3.png"
-              class="card-img-bottom"
-              alt="〇〇の画像です"
-            />
-          </div>
-          <i class="fas fa-check-circle"></i>
-        </article>
-        <article class="card">
-          <div class="card-body">
-            <h5 class="card-title">URL</h5>
-          </div>
-          <div class="img-wrapper">
-            <img
-              src="@/assets/image/q_4.png"
-              class="card-img-bottom"
-              alt="〇〇の画像です"
-            />
-          </div>
+        <article class="card" v-for="course in courses" :key="course.id">
+          <a :href="'courses/' + course.id">
+            <div class="card-body">
+              <h5 class="card-title">{{ course.title }}</h5>
+            </div>
+            <div class="img-wrapper">
+              <img
+                :src="require('@/assets/image/' + course.img)"
+                class="card-img-bottom"
+                alt="〇〇の画像です"
+              />
+            </div>
+            <i class="fas fa-check-circle"></i>
+          </a>
         </article>
       </div>
     </section>
   </main>
 </template>
+<script>
+export default {
+  data() {
+    return { courses: null };
+  },
+  created() {
+    this.axios
+      .get("http://localhost:8080/courses")
+      .then((res) => {
+        console.log(res.data.courses[0].title);
+        console.log(this.courses);
+        this.courses = res.data.courses;
+      })
+      .catch((err) => {
+        console.log("エラー発生");
+        console.log(err);
+      });
+  },
+};
+</script>
 <style lang="scss" scoped>
 body div.container:first-of-type {
   margin-top: 52px;
@@ -177,8 +161,6 @@ h2:after {
       width: 100%; /*任意の横幅を指定*/
       object-fit: contain;
     }
-    display: flex;
-    align-items: center;
     background: #fff;
   }
   & .fa-check-circle {

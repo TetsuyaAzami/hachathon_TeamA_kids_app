@@ -2,12 +2,17 @@
   <!-- main -->
   <main>
     <div class="container container-main">
-      <h2 class="page-title">ようこそKIDS APP TITLEへ</h2>
+      <div class="container-title-logo">
+        <img
+          src="@/assets/image/title_logo2.png"
+        />
+      </div>
       <div class="contents container">
         <div class="image-wrapper">
           <img src="@/assets/image/login.png" alt="account" />
         </div>
         <div class="login-form-area">
+          <h3>新しいアカウントを作る</h3>
           <from action="#" method="post">
             <input
               type="text"
@@ -30,8 +35,8 @@
               placeholder="パスワードを入れてください"
               class="form-control"
             />
-            <button type="submit" class="btn btn-light sign-in-button">
-              アカウントを作る
+            <button type="submit" class="sign-up-button">
+              アカウントを登録
             </button>
           </from>
         </div>
@@ -39,42 +44,98 @@
     </div>
   </main>
 </template>
+
 <script>
 export default {
   name: "create-acount",
 };
 </script>
+
 <style scoped lang="scss">
 .container-main {
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  & .container-title-logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+  }
+  img {
+    max-width: 100%;
+  }
 }
-.page-title {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 20px;
-  color: #fff;
-  background-color: orange;
-}
-
 .contents {
   display: flex;
-  height: 500px;
+  justify-content: center;
+  min-height: 400px;
   width: 100%;
+  @media only screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+  }
   & .image-wrapper {
+    flex: 1;
     display: flex;
     align-items: center;
+    padding: 30px;
+    @media only screen and (max-width: 767px) {
+      order: 1;
+      margin: -30px 0px;
+    }
   }
   img {
     width: 100%;
   }
   & .login-form-area {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    input {
-      margin-bottom: 8px;
+    background:#fff;
+    border-radius: 6px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+    @media only screen and (max-width: 767px) {
+    width: 100%;
+    margin: 20px 0px;
     }
+
+    input {
+    background: #f5f5f5;
+    border: 0;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 15px 0px;
+    border: 1px solid #eee;
+    }
+
+    h3 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ccc;
+    margin: 12px 0px;
+    }
+
+    .sign-up-button {
+    position: relative;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 0;
+    background: #f55b23;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+    box-shadow: 0px 3px 0px #c17c4e;
+    }
+
     button {
       margin: 0 auto;
     }
