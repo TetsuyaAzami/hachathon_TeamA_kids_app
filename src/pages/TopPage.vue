@@ -1,8 +1,6 @@
 <template>
   <main>
-    <!-- <div class="container container-with-border"> -->
     <div class="container">
-      <!-- <h1 class="page_title">KIDS APP TITLE</h1> -->
       <div class="container-title-logo">
         <img
           src="@/assets/image/title_logo2.png"
@@ -32,12 +30,10 @@
               placeholder="パスワード"
               class="form-control"
             />
-            <!-- <button type="submit" class="btn btn-light sign-in-button"> -->
             <button type="submit" class="sign-in-button">
               ログイン
             </button>
           </form>
-          <!-- <button type="button" class="btn btn-light sign-up-button"> -->
           <button type="button" class="sign-up-button">
             新しいアカウント
           </button>
@@ -55,18 +51,6 @@
 
 <style scoped lang="scss">
 //main
-// main .container-with-border {
-//   margin: 12px auto;
-//   border: 4px solid #fff;
-//   border-radius: 15px;
-// }
-// .page_title {
-//   font-size: 4.5rem;
-//   font-weight: bold;
-//   text-align: center;
-//   padding-top: 32px;
-//   color: orange;
-// }
 .container-title-logo {
   display: flex;
   justify-content: center;
@@ -104,7 +88,6 @@
     background:#fff;
     border-radius: 6px;
     padding: 20px;
-    // padding-top:30px;
     width: 300px;
     margin: auto;
     box-shadow: 15px 15px 0px rgba(0,0,0,.1);
@@ -122,7 +105,6 @@
       margin: 12px 0px;
     }
     input {
-      // margin-bottom: 8px;
       background: #f5f5f5;
       border: 0;
       padding: 12px;
@@ -160,10 +142,6 @@
     
     button {
       margin: 0 auto;
-      // &.sign-in-button {
-      //   margin-top: 16px;
-      //   margin-bottom: 48px;
-      // }
     }
   }
 }
