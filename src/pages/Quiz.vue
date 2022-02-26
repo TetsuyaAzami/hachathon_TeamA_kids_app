@@ -1,29 +1,47 @@
 <template>
   <main>
     <div class="container contents">
+      <!-- 左キャラクター画像 -->
       <div class="img-wrapper">
         <img
           src="@/assets/image/robot.png"
           alt="KIDS_APPキャラクターの画像です"
         />
       </div>
+
+      <!-- クイズコンテンツ -->
       <div class="quiz-area">
         <h2 class="contents-category">
-          <span>インターネットの仕組み</span>
+          <span>{{ quizNowData.title }}</span>
         </h2>
         <div class="question-box">
-          <h3 class="question-number">第1問</h3>
-          <span class="question-text">
-            テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト？
+          <h3 class="question-number">{{ "第" + quizNowData.id + "問" }}</h3>
+          <span class="question-text">{{ quizNowData.question }} </span>
+        </div>
+        <!-- 答え -->
+        <div
+          class="answer-box"
+          v-for="answer in quizNowData.answers"
+          :key="answer.id"
+          @click="isAnswerTrue(answer)"
+        >
+          <span ref="`${answer}`" class="answer-text">{{ answer.answer }}</span>
+        </div>
+        <!-- 解説 -->
+        <div ref="quizDescription" class="quiz-description hidden">
+          <span>
+            {{ quizNowData.description }}
+            <button
+              class="btn btn-primary toNextButton"
+              @click="toNextQuestion()"
+            >
+              次の問題へ
+            </button>
           </span>
         </div>
-        <div class="answer-box">
-          <p class="answer-text">アンサー1</p>
-        </div>
-        <div class="answer-box">
-          <p class="answer-text">アンサー2</p>
-        </div>
       </div>
+
+      <!-- 右キャラクター画像 -->
       <div class="img-wrapper">
         <img
           src="@/assets/image/clock.png"
@@ -37,14 +55,36 @@
 export default {
   data() {
     return {
-      course: null,
+      count: 0,
+      quizData: null,
+      quizNowData: null,
+      quizDescription: null,
     };
+  },
+  methods: {
+    //答えのtrue,falseを判定して解説を表示
+    isAnswerTrue(answer) {
+      if (answer.is_answer == true) {
+        console.log(this.$refs);
+      } else {
+        console.log("falseです");
+      }
+      this.$refs.quizDescription.classList.remove("hidden");
+    },
+    //次の問題へ
+    toNextQuestion() {
+      this.count++;
+      this.$refs.quizDescription.classList.add("hidden");
+      this.quizNowData = this.quizData[this.count];
+    },
   },
   created() {
     this.axios
       .get("http://localhost:8080/courses/1")
       .then((res) => {
-        console.log(res);
+        console.log(res.data.quizzes);
+        this.quizData = res.data.quizzes;
+        this.quizNowData = res.data.quizzes[this.count];
       })
       .catch((err) => {
         console.log(err);
@@ -81,12 +121,21 @@ export default {
     text-align: center;
     background-color: #fff;
   }
-  .answer-box {
+  .answer-box,
+  .quiz-description {
     margin-bottom: 18px;
+    padding: 6px;
+    font-size: 1.5em;
+    font-weight: bold;
     background-color: #fff;
     text-align: center;
+    .btn {
+      margin: auto;
+      margin-top: 12px;
+    }
   }
 }
+
 // テキスト装飾指定
 .contents-category {
   position: relative;
@@ -132,9 +181,8 @@ h2:after {
 }
 .answer-text {
   margin: auto;
-  padding: 6px;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #04294f;
+}
+.hidden {
+  display: none;
 }
 </style>
