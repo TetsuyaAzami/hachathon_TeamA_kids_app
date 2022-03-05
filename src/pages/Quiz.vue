@@ -26,13 +26,24 @@
           @click="isAnswerTrue(answer)"
         >
           <span ref="`${answer}`" class="answer-text">{{ answer.answer }}</span>
+          <!-- マルバツ画像 -->
+          <div ref="answerCheck" class="answer-check hidden">
+            <img v-show="answer.is_answer == true"
+              src="@/assets/image/correct.png"
+              alt="判定マーク"
+            />
+            <img v-show="answer.is_answer == false"
+              src="@/assets/image/wrong.png"
+              alt="判定マーク"
+            />
+          </div>
         </div>
         <!-- 解説 -->
         <div ref="quizDescription" class="quiz-description hidden">
           <span>
             {{ quizNowData.description }}
             <button
-              class="btn btn-primary toNextButton"
+              type="button" class="btn toNextButton"
               @click="toNextQuestion()"
             >
               次の問題へ
@@ -59,6 +70,7 @@ export default {
       quizData: null,
       quizNowData: null,
       quizDescription: null,
+      answerCheck: null
     };
   },
   methods: {
@@ -70,11 +82,15 @@ export default {
         console.log("falseです");
       }
       this.$refs.quizDescription.classList.remove("hidden");
+      this.$refs.answerCheck[0].classList.remove("hidden");
+      this.$refs.answerCheck[1].classList.remove("hidden");
     },
-    //次の問題へ
+    // 次の問題へ
     toNextQuestion() {
       this.count++;
       this.$refs.quizDescription.classList.add("hidden");
+      this.$refs.answerCheck[0].classList.add("hidden");
+      this.$refs.answerCheck[1].classList.add("hidden");
       this.quizNowData = this.quizData[this.count];
     },
   },
@@ -97,7 +113,6 @@ export default {
 .contents {
   display: flex;
   width: 100%;
-  height: 500px;
   margin-top: 52px;
   & .img-wrapper {
     display: flex;
@@ -123,17 +138,37 @@ export default {
   }
   .answer-box,
   .quiz-description {
+    position: relative;
     margin-bottom: 18px;
-    padding: 6px;
+    padding: 12px 24px;
     font-size: 1.5em;
     font-weight: bold;
     background-color: #fff;
     text-align: center;
     .btn {
-      margin: auto;
-      margin-top: 12px;
+      margin: 24px auto;
+      font-size: 1.2rem;
+      background-color: #0688d2;
+    }
+    .btn:hover {
+      color: #fff;
+      background-color: #0068b7;
+    }
+    .answer-check {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      img {
+        width: 25%;
+        height: 25%;
+      }
     }
   }
+  // .answer-box:hover {
+  //   color: #fff;
+  //   background-color: #0688d2;
+  // }
 }
 
 // テキスト装飾指定
