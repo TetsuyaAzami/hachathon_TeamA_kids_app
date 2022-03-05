@@ -60,7 +60,7 @@ ul {
 .btn {
   display: block;
   font-weight: bold;
-  color: #00ccff;
+  color: #fff;
 }
 
 body {
