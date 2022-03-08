@@ -9,6 +9,8 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 //ルートコンポーネントのimport
 import App from "./App.vue";
+//routerファイルのimport
+import router from "./router";
 
 //mock service workerの設定
 if (process.env.NODE_ENV === "development") {
@@ -18,5 +20,6 @@ if (process.env.NODE_ENV === "development") {
 
 const app = createApp(App);
 app.use(VueAxios, axios);
+app.use(router);
 app.component("fa", FontAwesomeIcon);
 app.mount("#app");

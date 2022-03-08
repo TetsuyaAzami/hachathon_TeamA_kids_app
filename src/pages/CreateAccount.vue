@@ -3,9 +3,7 @@
   <main>
     <div class="container container-main">
       <div class="container-title-logo">
-        <img
-          src="@/assets/image/title_logo2.png"
-        />
+        <img src="@/assets/image/title_logo2.png" />
       </div>
       <div class="contents container">
         <div class="image-wrapper">
@@ -13,7 +11,7 @@
         </div>
         <div class="login-form-area">
           <h3>新しいアカウントを作る</h3>
-          <from action="#" method="post">
+          <form action="/signup" method="post">
             <input
               type="text"
               id="name"
@@ -38,7 +36,7 @@
             <button type="submit" class="sign-up-button">
               アカウントを登録
             </button>
-          </from>
+          </form>
         </div>
       </div>
     </div>
@@ -93,47 +91,47 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background:#fff;
+    background: #fff;
     border-radius: 6px;
     padding: 20px;
     max-width: 600px;
     margin: auto;
-    box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+    box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.1);
     @media only screen and (max-width: 767px) {
-    width: 100%;
-    margin: 20px 0px;
+      width: 100%;
+      margin: 20px 0px;
     }
 
     input {
-    background: #f5f5f5;
-    border: 0;
-    padding: 12px;
-    border-radius: 6px;
-    margin: 15px 0px;
-    border: 1px solid #eee;
+      background: #f5f5f5;
+      border: 0;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 15px 0px;
+      border: 1px solid #eee;
     }
 
     h3 {
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #ccc;
-    margin: 12px 0px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ccc;
+      margin: 12px 0px;
     }
 
     .sign-up-button {
-    position: relative;
-    width: 100%;
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 6px;
-    border: 0;
-    background: #f55b23;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 1px 1px 0px rgba(0,0,0,.1);
-    box-shadow: 0px 3px 0px #c17c4e;
+      position: relative;
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 6px;
+      border: 0;
+      background: #f55b23;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 3px 0px #c17c4e;
     }
 
     button {
