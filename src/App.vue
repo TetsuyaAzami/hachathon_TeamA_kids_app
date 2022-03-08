@@ -3,7 +3,8 @@
   <!-- <TopPageVue></TopPageVue> -->
   <!-- <CreateAccountVue></CreateAccountVue> -->
   <!-- <HomeVue></HomeVue> -->
-  <QuizVue></QuizVue>
+  <!-- <QuizVue></QuizVue> -->
+  <QuizResultVue></QuizResultVue>
   <FooterVue></FooterVue>
 </template>
 
@@ -12,7 +13,8 @@ import HeaderVue from "./components/Header.vue";
 // import TopPageVue from "./pages/TopPage.vue";
 // import CreateAccountVue from "./pages/CreateAccount.vue";
 // import HomeVue from "./pages/Home.vue";
-import QuizVue from "./pages/Quiz.vue";
+// import QuizVue from "./pages/Quiz.vue";
+import QuizResultVue from "./pages/QuizResult.vue";
 import FooterVue from "./components/Footer.vue";
 export default {
   name: "App",
@@ -21,7 +23,8 @@ export default {
     // TopPageVue,
     // CreateAccountVue,
     // HomeVue,
-    QuizVue,
+    // QuizVue,
+    QuizResultVue,
     FooterVue,
   },
 };
