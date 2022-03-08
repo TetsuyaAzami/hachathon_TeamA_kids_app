@@ -5,6 +5,7 @@
   <!-- <HomeVue></HomeVue> -->
   <!-- <QuizVue></QuizVue> -->
   <QuizResultVue></QuizResultVue>
+  <router-view></router-view>
   <FooterVue></FooterVue>
 </template>
 
@@ -16,6 +17,7 @@ import HeaderVue from "./components/Header.vue";
 // import QuizVue from "./pages/Quiz.vue";
 import QuizResultVue from "./pages/QuizResult.vue";
 import FooterVue from "./components/Footer.vue";
+
 export default {
   name: "App",
   components: {

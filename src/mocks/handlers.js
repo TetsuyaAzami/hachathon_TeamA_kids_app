@@ -35,7 +35,7 @@ export const handlers = [
         quizzes: [
           {
             /////////テーブル名 カラム名
-            id: 1, //quizzes quiz_id → eをつけるならつけるで揃えましょう
+            id: 1, //quizzes quiz_id → テーブル名はquizzes(quizの複数形はこれらしい)
             question: "インターネットの入り口ってどこかな？", //quizzes quiestion
             description:
               "クローム、サファリ、エッジなどから見たいページにアクセスするよ。", //quizzes description
@@ -47,7 +47,7 @@ export const handlers = [
           },
           {
             /////////テーブル名 カラム名
-            id: 2, //quizzes quiz_id → eをつけるならつけるで揃えましょう
+            id: 2, //quizzes quiz_id → テーブル名はquizzes(quizの複数形はこれらしい)
             question: "見たいサイト（ページ）は何が探してくれる？", //quizzes quiestion
             description:
               "ニュースやユーチューブのサイト（ページ）を代わりに探してくれるよ。", //quizzes description
