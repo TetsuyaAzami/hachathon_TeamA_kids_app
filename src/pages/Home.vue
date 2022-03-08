@@ -26,7 +26,9 @@
       </h2>
       <div class="cards">
         <article class="card" v-for="course in courses" :key="course.id">
-          <a :href="'courses/' + course.id">
+          <router-link
+            :to="{ name: 'courseDetail', params: { courseId: course.id } }"
+          >
             <div class="card-body">
               <h5 class="card-title">{{ course.title }}</h5>
             </div>
@@ -38,7 +40,7 @@
               />
             </div>
             <i class="fas fa-check-circle"></i>
-          </a>
+          </router-link>
         </article>
       </div>
     </section>

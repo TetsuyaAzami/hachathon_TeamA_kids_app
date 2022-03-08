@@ -28,11 +28,13 @@
           <span ref="`${answer}`" class="answer-text">{{ answer.answer }}</span>
           <!-- マルバツ画像 -->
           <div ref="answerCheck" class="answer-check hidden">
-            <img v-show="answer.is_answer == true"
+            <img
+              v-show="answer.is_answer == true"
               src="@/assets/image/correct.png"
               alt="判定マーク"
             />
-            <img v-show="answer.is_answer == false"
+            <img
+              v-show="answer.is_answer == false"
               src="@/assets/image/wrong.png"
               alt="判定マーク"
             />
@@ -43,7 +45,8 @@
           <span>
             {{ quizNowData.description }}
             <button
-              type="button" class="btn toNextButton"
+              type="button"
+              class="btn toNextButton"
               @click="toNextQuestion()"
             >
               次の問題へ
@@ -70,16 +73,16 @@ export default {
       quizData: null,
       quizNowData: null,
       quizDescription: null,
-      answerCheck: null
+      answerCheck: null,
     };
   },
   methods: {
     //答えのtrue,falseを判定して解説を表示
     isAnswerTrue(answer) {
       if (answer.is_answer == true) {
-        console.log(this.$refs);
+        //
       } else {
-        console.log("falseです");
+        //
       }
       this.$refs.quizDescription.classList.remove("hidden");
       this.$refs.answerCheck[0].classList.remove("hidden");
@@ -96,9 +99,8 @@ export default {
   },
   created() {
     this.axios
-      .get("http://localhost:8080/courses/1")
+      .get(`http://localhost:8080/courses/${this.$route.params.courseId}`)
       .then((res) => {
-        console.log(res.data.quizzes);
         this.quizData = res.data.quizzes;
         this.quizNowData = res.data.quizzes[this.count];
       })

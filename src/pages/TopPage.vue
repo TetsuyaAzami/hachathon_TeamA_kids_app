@@ -2,9 +2,7 @@
   <main>
     <div class="container">
       <div class="container-title-logo">
-        <img
-          src="@/assets/image/title_logo2.png"
-        />
+        <img src="@/assets/image/title_logo2.png" />
       </div>
       <div class="contents container">
         <div class="img-wrapper">
@@ -15,12 +13,12 @@
         </div>
         <div class="login-form-area">
           <h2>ゲームをはじめよう</h2>
-          <form action="#" method="post">
+          <form action="/login" method="post">
             <input
               type="text"
-              id="name"
-              name="name"
-              placeholder="ユーザ名"
+              id="email"
+              name="email"
+              placeholder="メールアドレス"
               class="form-control"
             />
             <input
@@ -30,13 +28,13 @@
               placeholder="パスワード"
               class="form-control"
             />
-            <button type="submit" class="sign-in-button">
-              ログイン
-            </button>
+            <button type="submit" class="sign-in-button">ログイン</button>
           </form>
-          <button type="button" class="sign-up-button">
-            新しいアカウント
-          </button>
+          <router-link :to="{ name: 'toSignUp' }">
+            <button type="button" class="sign-up-button">
+              新しいアカウント
+            </button>
+          </router-link>
         </div>
         <div class="img-wrapper">
           <img
@@ -85,17 +83,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background:#fff;
+    background: #fff;
     border-radius: 6px;
     padding: 20px;
     width: 300px;
     margin: auto;
-    box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+    box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.1);
     @media only screen and (max-width: 991px) {
       flex: 1 1 55%;
       margin: 0px 10px 20px 20px;
     }
-
 
     h2 {
       text-align: center;
@@ -123,7 +120,7 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #fff;
-      text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 3px 0px #c17c4e;
     }
     .sign-up-button {
@@ -136,10 +133,10 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #fff;
-      text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 3px 0px #c17c4e;
     }
-    
+
     button {
       margin: 0 auto;
     }

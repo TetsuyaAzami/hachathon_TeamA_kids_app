@@ -1,27 +1,17 @@
 <template>
   <HeaderVue></HeaderVue>
-  <!-- <TopPageVue></TopPageVue> -->
-  <!-- <CreateAccountVue></CreateAccountVue> -->
-  <!-- <HomeVue></HomeVue> -->
-  <QuizVue></QuizVue>
+  <router-view></router-view>
   <FooterVue></FooterVue>
 </template>
 
 <script>
 import HeaderVue from "./components/Header.vue";
-// import TopPageVue from "./pages/TopPage.vue";
-// import CreateAccountVue from "./pages/CreateAccount.vue";
-// import HomeVue from "./pages/Home.vue";
-import QuizVue from "./pages/Quiz.vue";
 import FooterVue from "./components/Footer.vue";
+
 export default {
   name: "App",
   components: {
     HeaderVue,
-    // TopPageVue,
-    // CreateAccountVue,
-    // HomeVue,
-    QuizVue,
     FooterVue,
   },
 };
