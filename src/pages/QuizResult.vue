@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="container contents">
+      <!-- コースタイトル -->
       <h2 class="contents-category">
           <span>インターネットの仕組み</span>
       </h2>
@@ -13,22 +14,36 @@
           />
         </div>
         <!-- クイズ結果 -->
+        <!-- 正解数 -->
         <div class="result-box">
-          <div class="quiz-now">
-            <div class="correct-answer">
-              <span>3問正解</span>
-            </div>
-            <div class="get-point">
-              <span>30ポイント</span>
-            </div>
+          <div class="title bg-orange">
+            <h6>正解数</h6>
           </div>
-          <div class="total-point">
-            <span>合計80ポイント</span>
+          <div class="correct-answer">
+            <h3>3 問</h3>
           </div>
         </div>
+        <!-- 獲得ポイント -->
+        <div class="result-box">
+          <div class="title bg-blue">
+            <h6>獲得ポイント</h6>
+          </div>
+          <div class="get-point">
+            <h3>30 P</h3>
+          </div>
+        </div>
+        <!-- 合計ポイント -->
+        <div class="result-box">
+          <div class="title bg-red">
+            <h6>合計ポイント</h6>
+          </div>
+          <div class="total-point">
+            <h3>50 P</h3>
+          </div>
+        </div> 
       </div>
       <button type="butoon" class="btn">
-        ホームに戻る
+        コース一覧に戻る
       </button>
     </div>
   </main>
@@ -38,14 +53,22 @@
 .contents {
   display: flex;
   flex-direction: column;
-  min-height: 400px;
   width: 100%;
   margin-top: 52px;
+
   & .img-wrapper {
     display: flex;
     align-items: center;
-    width: 35%;
+    width: 30%;
     padding: 0px 12px;
+    @media only screen and (max-width: 991px) {
+      order: 1;
+      margin-top: 24px;
+    }
+    @media only screen and (max-width: 767px) {
+      width: 50%;
+      margin: 0px;
+    }
   }
   img {
     width: 100%;
@@ -55,16 +78,38 @@
     display: flex;
     justify-content: center;
     margin: 24px auto;
+    @media only screen and (max-width: 991px) {
+      flex-wrap: wrap;
+      margin-top: 36px;
+      margin-bottom: 0px;
+    }
+    @media only screen and (max-width: 767px) {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 24px;
+    }
   }
   .result-box {
-    margin: 24px 0px;
-    padding: 24px 24px;
-    width: 60%;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 12px;
+    width: 180px;
+    height: 180px;
     background-color: #fff;
-    &.quiz-now {
-      display: flex;
-      flex-direction: row;
+    @media only screen and (max-width: 767px) {
+      margin: 12px;
+      width: 60%;
+    }
+
+    & .title {
+      text-align: center;
+      padding: 12px;
+      width: 100%;
+
+      &.bg-orange {background-color: #ffb400;}
+      &.bg-blue {background-color: #0068b7;}
+      &.bg-red {background-color: #f55b23;}
     }
   }
   .btn {
@@ -92,6 +137,16 @@
   text-align: center;
   font-weight: bold;
   color: #fff;
+  @media only screen and (max-width: 767px) {
+    left: 0%;
+    width: calc(100% - 30px - 30px);
+  }
+}
+span {
+   @media only screen and (max-width: 767px) {
+     margin: auto;
+     font-size: 1.5rem;
+  }
 }
 h2:before {
   position: absolute;
@@ -111,4 +166,29 @@ h2:after {
   border-style: solid;
   border-color: transparent #ffb400 transparent #ffb400;
 }
+h3 {
+  margin: auto;
+  padding: 24px 12px;
+  font-size: 2.8rem;
+  font-weight: bold;
+}
+h6 {
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+.correct-answer {
+  padding: 12px 24px;
+  color: #ffb400;
+}
+.get-point {
+  padding: 12px 24px;
+  color: #0068b7;
+}
+.total-point {
+  padding: 12px 24px;
+  color: #f55b23;
+}
+
 </style>
