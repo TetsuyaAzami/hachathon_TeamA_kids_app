@@ -3,6 +3,7 @@ import TopPageVue from "./pages/TopPage.vue";
 import CreateAccountVue from "./pages/CreateAccount.vue";
 import HomeVue from "./pages/Home.vue";
 import QuizVue from "./pages/Quiz.vue";
+import QuizResultVue from "./pages/QuizResult.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,6 +16,7 @@ const router = createRouter({
       component: QuizVue,
       name: "courseDetail",
     },
+    { path: "/result", component: QuizResultVue, name: "result"}
   ],
 });
 
