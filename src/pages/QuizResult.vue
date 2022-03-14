@@ -55,7 +55,6 @@
   flex-direction: column;
   width: 100%;
   margin-top: 52px;
-
   & .img-wrapper {
     display: flex;
     align-items: center;
@@ -64,10 +63,11 @@
     @media only screen and (max-width: 991px) {
       order: 1;
       margin-top: 24px;
+      width: 40%;
     }
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: 991px) {
+      margin-top: 12px;
       width: 50%;
-      margin: 0px;
     }
   }
   img {

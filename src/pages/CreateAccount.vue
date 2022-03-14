@@ -67,6 +67,7 @@ export default {
 .contents {
   display: flex;
   justify-content: center;
+  padding: 0px 24px;
   min-height: 400px;
   width: 100%;
   @media only screen and (max-width: 767px) {
@@ -76,6 +77,7 @@ export default {
   & .image-wrapper {
     flex: 1;
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 30px;
     @media only screen and (max-width: 767px) {
@@ -84,13 +86,16 @@ export default {
     }
   }
   img {
-    width: 100%;
+    width: 80%;
+    @media only screen and (max-width: 991px) {
+      width: 100%;
+    }
   }
   & .login-form-area {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background: #fff;
     border-radius: 6px;
     padding: 20px;
