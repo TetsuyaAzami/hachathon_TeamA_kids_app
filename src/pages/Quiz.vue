@@ -116,11 +116,26 @@ export default {
   display: flex;
   width: 100%;
   margin-top: 52px;
+  @media only screen and (max-width: 767px) {
+    flex-wrap: wrap;
+  }
   & .img-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: 25%;
+    margin-top: 72px;
     padding: 0px 12px;
+    @media only screen and (max-width: 991px) {
+      margin-top: 120px;
+      padding: 0px;
+    }
+    @media only screen and (max-width: 767px) {
+      flex: 1 0 50%;
+      order: 1;
+      margin-top: 12px;
+      padding: 12px;
+      width: 40%;
+    }
   }
   img {
     width: 100%;
@@ -131,6 +146,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     padding: 0px 12px;
+    @media only screen and (max-width: 767px) {
+      flex: 1 0 60%;
+    }
   }
   .question-box {
     margin: 24px 0px;
@@ -187,6 +205,23 @@ export default {
   text-align: center;
   font-weight: bold;
   color: #fff;
+  @media only screen and (max-width: 991px) {
+    padding-top: 10px
+  }
+  @media only screen and (max-width: 767px) {
+    padding-top: 12px
+  }
+}
+span {
+  @media only screen and (max-width: 991px) {
+    font-size: 1.35rem;
+  }
+  @media only screen and (max-width: 767px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-width: 421px) {
+    font-size: 1.35rem;
+  }
 }
 h2:before {
   position: absolute;
@@ -215,6 +250,9 @@ h2:after {
   font-size: 1.5em;
   font-weight: bold;
   color: #04294f;
+  @media only screen and (max-width: 421px) {
+    font-size: 1.35rem;
+  }
 }
 .answer-text {
   margin: auto;
