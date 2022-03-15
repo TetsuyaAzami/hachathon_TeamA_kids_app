@@ -1,9 +1,8 @@
 const db = require("../models");
-const ROLES = db.ROLES;
 const User = db.user;
 
 //重複確認
-checkDuplicateUsernameOrEmail = async (req, res, next) => {
+let checkDuplicateEmail = async (req, res, next) => {
   try {
     // Usernameの重複確認
     // let user = await User.findOne({
@@ -17,26 +16,26 @@ checkDuplicateUsernameOrEmail = async (req, res, next) => {
     //   });
     // }
     // Emailの重複確認
-    user = await User.findOne({
+    let email = await User.findOne({
       where: {
         email: req.body.email
       }
     });
-    if(user) {
-      return res.status(400).send({
-        message: "Email is already in use"
-      });
+    if(email) {
+      return res.status(400).send([{
+        message: "違うメールアドレスを入力してね"
+      }]);
     }
     next();
   } catch(error) {
-    return res.status(400).send({
-      message: "Unable to Validate Username"
-    });
+    return res.status(400).send([{
+      message: "メールアドレスを正しく入力してね"
+    }]);
   }
 };
 
 const verifySignUp = {
-  checkDuplicateUsernameOrEmail
+  checkDuplicateEmail
 };
 
 module.exports = verifySignUp;

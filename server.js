@@ -18,7 +18,7 @@ app.use(
 
 //db
 const db = require("./app/models");
-const Role = db.role;
+// const Role = db.role;
 
 //本番
 //db.sequelize.sync();
@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 require("./app/routes/auth.routes")(app);
 // require("./app/routes/user.routes")(app);
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Listening port ${PORT}`);
 });
