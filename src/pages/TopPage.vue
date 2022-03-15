@@ -13,7 +13,7 @@
         </div>
         <div class="login-form-area">
           <h2>ゲームをはじめよう</h2>
-          <form action="/login" method="post">
+          <form>
             <input
               type="text"
               id="email"
@@ -28,7 +28,9 @@
               placeholder="パスワード"
               class="form-control"
             />
-            <button type="submit" class="sign-in-button">ログイン</button>
+            <button type="button" class="sign-in-button" @click="singin">
+              ログイン
+            </button>
           </form>
           <router-link :to="{ name: 'toSignUp' }">
             <button type="button" class="sign-up-button">
@@ -46,6 +48,36 @@
     </div>
   </main>
 </template>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    singin() {
+      const $email = document.getElementById("email");
+      let emailVal = $email.value;
+      const $password = document.getElementById("password");
+      let passwordVal = $password.value;
+      console.log(emailVal);
+      console.log(passwordVal);
+      this.axios
+        .post("http://localhost:8080/signin", {
+          email: emailVal,
+          password: passwordVal,
+        })
+        .then((res) => {
+          console.log("hoge");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log("エラー発生");
+          console.log(err);
+        });
+    },
+  },
+};
+</script>
 
 <style scoped lang="scss">
 //main
