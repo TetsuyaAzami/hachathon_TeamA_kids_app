@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
     res.json([
-      { message: "ユーザー登録に成功しました" }
+      { message: "OK" }
     ]);
 
   } catch (error) {
@@ -28,18 +28,13 @@ exports.signin = async (req, res) => {
         email: req.body.email,
       },
     });
-    if (!user) {
-      return res.status(404).json([
-        { message: "ユーザーが見つかりません" }
-      ]);
-    }
     const passwordIsValid = bcrypt.compareSync(
       req.body.password,
       user.password
     );
-    if (!passwordIsValid) {
-      return res.status(401).json([{
-        message: "パスワードが間違っています",
+    if (!user || !passwordIsValid) {
+      return res.json([{
+        message: "ERROR",
       }]);
     }
     const token = jwt.sign({ id: user.id }, config.secret, {

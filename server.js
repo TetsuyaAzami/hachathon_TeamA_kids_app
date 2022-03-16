@@ -7,7 +7,7 @@ app.use(cors());
 //Content-type application/jsonに対応
 app.use(express.json());
 //Content-type application/x-www-form-urlencodedに対応
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(
   cookieSession({
     name: "kidsapp-session",
@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 require("./app/routes/auth.routes")(app);
 // require("./app/routes/user.routes")(app);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Listening port ${PORT}`);
 });
