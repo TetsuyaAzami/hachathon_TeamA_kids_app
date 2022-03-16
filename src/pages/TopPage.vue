@@ -28,7 +28,7 @@
               placeholder="パスワード"
               class="form-control"
             />
-            <button type="button" class="sign-in-button" @click="singin">
+            <button type="button" class="sign-in-button" @click="signin">
               ログイン
             </button>
           </form>
@@ -54,7 +54,7 @@ export default {
     return {};
   },
   methods: {
-    singin() {
+    signin() {
       const $email = document.getElementById("email");
       let emailVal = $email.value;
       const $password = document.getElementById("password");
@@ -62,16 +62,19 @@ export default {
       console.log(emailVal);
       console.log(passwordVal);
       this.axios
-        .post("http://localhost:8080/signin", {
-          email: emailVal,
-          password: passwordVal,
+        .post("http://localhost:3000/signin", {
+          "email": emailVal,
+          "password": passwordVal
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
         })
         .then((res) => {
-          console.log("hoge");
-          console.log(res.data);
-        })
+          console.log(res);
+        },)
         .catch((err) => {
-          console.log("エラー発生");
           console.log(err);
         });
     },

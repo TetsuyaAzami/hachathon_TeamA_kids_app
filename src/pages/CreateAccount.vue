@@ -11,11 +11,11 @@
         </div>
         <div class="login-form-area">
           <h3>新しいアカウントを作る</h3>
-          <form action="/signup" method="post">
+          <form>
             <input
-              type="text"
-              id="name"
-              name="name"
+              type="username"
+              id="username"
+              name="username"
               placeholder="ニックネームを入れてください"
               class="form-control"
             />
@@ -33,7 +33,7 @@
               placeholder="パスワードを入れてください"
               class="form-control"
             />
-            <button type="submit" class="sign-up-button">
+            <button type="submit" class="sign-up-button" @click="signup">
               アカウントを登録
             </button>
           </form>
@@ -46,6 +46,41 @@
 <script>
 export default {
   name: "create-acount",
+  data() {
+    return {}
+  },
+    methods: {
+    signup() {
+      const $name = document.getElementById("username");
+      let nameVal = $name.value;
+      const $email = document.getElementById("email");
+      let emailVal = $email.value;
+      const $password = document.getElementById("password");
+      let passwordVal = $password.value;
+      console.log(nameVal);
+      console.log(emailVal);
+      console.log(passwordVal);
+      this.axios
+        .post("http://localhost:3000/signup", {
+          "username": nameVal,
+          "email": emailVal,
+          "password": passwordVal
+        }, 
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then((res) => {
+          console.log("OK");
+          console.log(res);
+        },)
+        .catch((err) => {
+          console.log("エラー発生");
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 
