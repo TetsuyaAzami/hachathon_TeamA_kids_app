@@ -21,13 +21,14 @@
       </div>
     </div>
     <section class="container main-contents">
-      <h2 class="contents-category">
-        <span>レベル1</span><span>&gt;&gt;</span
-        ><span>インターネットの仕組み</span>
+      <h2 class="page-info">
+        <span>学習コースを選ぼう</span>
       </h2>
       <div class="cards">
         <article class="card" v-for="course in courses" :key="course.id">
-          <a :href="'courses/' + course.id">
+          <router-link
+            :to="{ name: 'courseDetail', params: { courseId: course.id } }"
+          >
             <div class="card-body">
               <h5 class="card-title">{{ course.title }}</h5>
             </div>
@@ -39,7 +40,7 @@
               />
             </div>
             <i class="fas fa-check-circle"></i>
-          </a>
+          </router-link>
         </article>
       </div>
     </section>
@@ -95,23 +96,25 @@ body div.container:first-of-type {
 }
 
 .main-contents {
-  margin-top: 24px;
+  margin: 24px auto;
 }
-.contents-category {
+.page-info {
   position: relative;
+  left: 10%;
   box-sizing: border-box;
   height: 60px;
   //角になってる部分の幅だけ要素の幅を狭める
-  width: calc(100% - 30px - 30px);
+  width: calc(80% - 30px - 30px);
   //角になってる部分の幅だけ要素を右にずらす
   margin-left: 30px;
   padding: 12px;
-  background-color: rgb(221, 69, 27);
+  background-color: #f55b23;
   text-align: center;
   font-weight: bold;
   color: #fff;
-  & span {
-    margin-right: 24px;
+  @media only screen and (max-width: 767px) {
+    left: 0%;
+    width: calc(100% - 30px - 30px);
   }
 }
 
@@ -122,7 +125,7 @@ h2:before {
   content: "";
   border-width: 30px 30px 30px 0;
   border-style: solid;
-  border-color: transparent rgb(221, 69, 27) transparent transparent;
+  border-color: transparent #f55b23 transparent transparent;
 }
 h2:after {
   position: absolute;
@@ -131,14 +134,18 @@ h2:after {
   content: "";
   border-width: 30px 0 30px 30px;
   border-style: solid;
-  border-color: transparent rgb(221, 69, 27) transparent rgb(221, 69, 27);
+  border-color: transparent #f55b23 transparent #f55b23;
 }
 
 .cards {
   margin-top: 24px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  // grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
   gap: 20px;
+  @media only screen and (max-width: 767px) {
+    margin: 24px;
+  }
 }
 .card {
   position: relative;
@@ -146,7 +153,7 @@ h2:after {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: orange;
+    background-color: #ffbb00;
     & .card-title {
       display: block;
       margin: 0;

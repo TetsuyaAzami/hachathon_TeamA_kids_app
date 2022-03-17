@@ -1,29 +1,61 @@
 <template>
   <main>
     <div class="container contents">
+      <!-- 左キャラクター画像 -->
       <div class="img-wrapper">
         <img
           src="@/assets/image/robot.png"
           alt="KIDS_APPキャラクターの画像です"
         />
       </div>
+
+      <!-- クイズコンテンツ -->
       <div class="quiz-area">
         <h2 class="contents-category">
-          <span>インターネットの仕組み</span>
+          <span>{{ quizNowData.title }}</span>
         </h2>
         <div class="question-box">
-          <h3 class="question-number">第1問</h3>
-          <span class="question-text">
-            テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト？
+          <h3 class="question-number">{{ "第" + quizNowData.id + "問" }}</h3>
+          <span class="question-text">{{ quizNowData.question }} </span>
+        </div>
+        <!-- 答え -->
+        <div
+          class="answer-box"
+          v-for="answer in quizNowData.answers"
+          :key="answer.id"
+          @click="isAnswerTrue(answer)"
+        >
+          <span ref="`${answer}`" class="answer-text">{{ answer.answer }}</span>
+          <!-- マルバツ画像 -->
+          <div ref="answerCheck" class="answer-check hidden">
+            <img
+              v-show="answer.is_answer == true"
+              src="@/assets/image/correct.png"
+              alt="判定マーク"
+            />
+            <img
+              v-show="answer.is_answer == false"
+              src="@/assets/image/wrong.png"
+              alt="判定マーク"
+            />
+          </div>
+        </div>
+        <!-- 解説 -->
+        <div ref="quizDescription" class="quiz-description hidden">
+          <span>
+            {{ quizNowData.description }}
+            <button
+              type="button"
+              class="btn toNextButton"
+              @click="toNextQuestion()"
+            >
+              次の問題へ
+            </button>
           </span>
         </div>
-        <div class="answer-box">
-          <p class="answer-text">アンサー1</p>
-        </div>
-        <div class="answer-box">
-          <p class="answer-text">アンサー2</p>
-        </div>
       </div>
+
+      <!-- 右キャラクター画像 -->
       <div class="img-wrapper">
         <img
           src="@/assets/image/clock.png"
@@ -37,14 +69,40 @@
 export default {
   data() {
     return {
-      course: null,
+      count: 0,
+      quizData: null,
+      quizNowData: null,
+      quizDescription: null,
+      answerCheck: null,
     };
+  },
+  methods: {
+    //答えのtrue,falseを判定して解説を表示
+    isAnswerTrue(answer) {
+      if (answer.is_answer == true) {
+        //
+      } else {
+        //
+      }
+      this.$refs.quizDescription.classList.remove("hidden");
+      this.$refs.answerCheck[0].classList.remove("hidden");
+      this.$refs.answerCheck[1].classList.remove("hidden");
+    },
+    // 次の問題へ
+    toNextQuestion() {
+      this.count++;
+      this.$refs.quizDescription.classList.add("hidden");
+      this.$refs.answerCheck[0].classList.add("hidden");
+      this.$refs.answerCheck[1].classList.add("hidden");
+      this.quizNowData = this.quizData[this.count];
+    },
   },
   created() {
     this.axios
-      .get("http://localhost:8080/courses/1")
+      .get(`http://localhost:8080/courses/${this.$route.params.courseId}`)
       .then((res) => {
-        console.log(res);
+        this.quizData = res.data.quizzes;
+        this.quizNowData = res.data.quizzes[this.count];
       })
       .catch((err) => {
         console.log(err);
@@ -57,13 +115,27 @@ export default {
 .contents {
   display: flex;
   width: 100%;
-  height: 500px;
   margin-top: 52px;
+  @media only screen and (max-width: 767px) {
+    flex-wrap: wrap;
+  }
   & .img-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     width: 25%;
+    margin-top: 72px;
     padding: 0px 12px;
+    @media only screen and (max-width: 991px) {
+      margin-top: 120px;
+      padding: 0px;
+    }
+    @media only screen and (max-width: 767px) {
+      flex: 1 0 50%;
+      order: 1;
+      margin-top: 12px;
+      padding: 12px;
+      width: 40%;
+    }
   }
   img {
     width: 100%;
@@ -74,6 +146,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     padding: 0px 12px;
+    @media only screen and (max-width: 767px) {
+      flex: 1 0 60%;
+    }
   }
   .question-box {
     margin: 24px 0px;
@@ -81,12 +156,41 @@ export default {
     text-align: center;
     background-color: #fff;
   }
-  .answer-box {
+  .answer-box,
+  .quiz-description {
+    position: relative;
     margin-bottom: 18px;
+    padding: 12px 24px;
+    font-size: 1.5em;
+    font-weight: bold;
     background-color: #fff;
     text-align: center;
+    .btn {
+      margin: 24px auto;
+      font-size: 1.2rem;
+      background-color: #0688d2;
+    }
+    .btn:hover {
+      color: #fff;
+      background-color: #0068b7;
+    }
+    .answer-check {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      img {
+        width: 25%;
+        height: 25%;
+      }
+    }
   }
+  // .answer-box:hover {
+  //   color: #fff;
+  //   background-color: #0688d2;
+  // }
 }
+
 // テキスト装飾指定
 .contents-category {
   position: relative;
@@ -101,6 +205,23 @@ export default {
   text-align: center;
   font-weight: bold;
   color: #fff;
+  @media only screen and (max-width: 991px) {
+    padding-top: 10px
+  }
+  @media only screen and (max-width: 767px) {
+    padding-top: 12px
+  }
+}
+span {
+  @media only screen and (max-width: 991px) {
+    font-size: 1.35rem;
+  }
+  @media only screen and (max-width: 767px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-width: 421px) {
+    font-size: 1.35rem;
+  }
 }
 h2:before {
   position: absolute;
@@ -129,12 +250,14 @@ h2:after {
   font-size: 1.5em;
   font-weight: bold;
   color: #04294f;
+  @media only screen and (max-width: 421px) {
+    font-size: 1.35rem;
+  }
 }
 .answer-text {
   margin: auto;
-  padding: 6px;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #04294f;
+}
+.hidden {
+  display: none;
 }
 </style>

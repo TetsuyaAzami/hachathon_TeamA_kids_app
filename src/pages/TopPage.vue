@@ -1,12 +1,8 @@
 <template>
   <main>
-    <!-- <div class="container container-with-border"> -->
     <div class="container">
-      <!-- <h1 class="page_title">KIDS APP TITLE</h1> -->
       <div class="container-title-logo">
-        <img
-          src="@/assets/image/title_logo2.png"
-        />
+        <img src="@/assets/image/title_logo2.png" />
       </div>
       <div class="contents container">
         <div class="img-wrapper">
@@ -17,12 +13,18 @@
         </div>
         <div class="login-form-area">
           <h2>ゲームをはじめよう</h2>
-          <form action="#" method="post">
+          <ul v-if="errors.length">
+            <li v-for="error in errors" :key="error" class="text-center errors">
+              {{ error }}
+            </li>
+          </ul>
+          <span class="text-center errors">{{ errorMessage }}</span>
+          <form>
             <input
               type="text"
-              id="name"
-              name="name"
-              placeholder="ユーザ名"
+              id="email"
+              name="email"
+              placeholder="メールアドレス"
               class="form-control"
             />
             <input
@@ -32,15 +34,15 @@
               placeholder="パスワード"
               class="form-control"
             />
-            <!-- <button type="submit" class="btn btn-light sign-in-button"> -->
-            <button type="submit" class="sign-in-button">
+            <button type="button" class="sign-in-button" @click="signin">
               ログイン
             </button>
           </form>
-          <!-- <button type="button" class="btn btn-light sign-up-button"> -->
-          <button type="button" class="sign-up-button">
-            新しいアカウント
-          </button>
+          <router-link :to="{ name: 'toSignUp' }">
+            <button type="button" class="sign-up-button">
+              新しいアカウント
+            </button>
+          </router-link>
         </div>
         <div class="img-wrapper">
           <img
@@ -52,21 +54,85 @@
     </div>
   </main>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      errors: [],
+      emailVal: "",
+      passwordVal: "",
+    };
+  },
+  methods: {
+    signin() {
+      const $email = document.getElementById("email");
+      this.emailVal = $email.value;
+      const $password = document.getElementById("password");
+      this.passwordVal = $password.value;
+
+      //バリデーションチェック
+      this.checkForm();
+      if (this.errors.length > 0) {
+        this.isValid = false;
+        return;
+      }
+
+      this.axios
+        .post(
+          "http://0.0.0.0:3000/signin",
+          {
+            email: this.emailVal,
+            password: this.passwordVal,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            alert("OK");
+            this.$router.push("/courses");
+          } else if (res.status == 500) {
+            alert("fail");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    //フォームバリデーションチェック
+    checkForm() {
+      this.errors = [];
+      if (!this.emailVal) {
+        this.errors.push("メールアドレスを入力してください");
+      }
+      if (!this.emailIsValid(this.emailVal)) {
+        this.errors.push("メールアドレスの形式で入力してください");
+      }
+      if (!this.passwordVal) {
+        this.errors.push("パスワードを入力してください");
+      }
+      if (this.passwordVal.length < 8) {
+        this.errors.push("パスワードは8文字以上にしてください");
+      }
+    },
+
+    // メールアドレス形式チェック
+    emailIsValid(email) {
+      let emailRegexp =
+        /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/i;
+      return emailRegexp.test(email);
+    },
+  },
+};
+</script>
 
 <style scoped lang="scss">
 //main
-// main .container-with-border {
-//   margin: 12px auto;
-//   border: 4px solid #fff;
-//   border-radius: 15px;
-// }
-// .page_title {
-//   font-size: 4.5rem;
-//   font-weight: bold;
-//   text-align: center;
-//   padding-top: 32px;
-//   color: orange;
-// }
 .container-title-logo {
   display: flex;
   justify-content: center;
@@ -101,18 +167,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background:#fff;
+    background: #fff;
     border-radius: 6px;
     padding: 20px;
-    // padding-top:30px;
     width: 300px;
     margin: auto;
-    box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+    box-shadow: 15px 15px 0px rgba(0, 0, 0, 0.1);
     @media only screen and (max-width: 991px) {
       flex: 1 1 55%;
       margin: 0px 10px 20px 20px;
     }
-
 
     h2 {
       text-align: center;
@@ -122,7 +186,6 @@
       margin: 12px 0px;
     }
     input {
-      // margin-bottom: 8px;
       background: #f5f5f5;
       border: 0;
       padding: 12px;
@@ -141,7 +204,7 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #fff;
-      text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 3px 0px #c17c4e;
     }
     .sign-up-button {
@@ -154,16 +217,12 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: #fff;
-      text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 3px 0px #c17c4e;
     }
-    
+
     button {
       margin: 0 auto;
-      // &.sign-in-button {
-      //   margin-top: 16px;
-      //   margin-bottom: 48px;
-      // }
     }
   }
 }
