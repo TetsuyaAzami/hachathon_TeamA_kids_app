@@ -53,6 +53,9 @@ ul {
   color: #fff;
 }
 
+.errors {
+  color: red;
+}
 body {
   min-height: 100vh;
   background-color: #b1fdff;

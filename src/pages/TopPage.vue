@@ -13,6 +13,12 @@
         </div>
         <div class="login-form-area">
           <h2>ゲームをはじめよう</h2>
+          <ul v-if="errors.length">
+            <li v-for="error in errors" :key="error" class="text-center errors">
+              {{ error }}
+            </li>
+          </ul>
+          <span class="text-center errors">{{ errorMessage }}</span>
           <form>
             <input
               type="text"
@@ -51,32 +57,75 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      errors: [],
+      emailVal: "",
+      passwordVal: "",
+    };
   },
   methods: {
     signin() {
       const $email = document.getElementById("email");
-      let emailVal = $email.value;
+      this.emailVal = $email.value;
       const $password = document.getElementById("password");
-      let passwordVal = $password.value;
-      console.log(emailVal);
-      console.log(passwordVal);
+      this.passwordVal = $password.value;
+
+      //バリデーションチェック
+      this.checkForm();
+      if (this.errors.length > 0) {
+        this.isValid = false;
+        return;
+      }
+
       this.axios
-        .post("http://localhost:3000/signin", {
-          "email": emailVal,
-          "password": passwordVal
-        },
-        {
-          headers: {
-            "Content-Type": "application/json"
+        .post(
+          "http://0.0.0.0:3000/signin",
+          {
+            email: this.emailVal,
+            password: this.passwordVal,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        })
+        )
         .then((res) => {
           console.log(res);
-        },)
+          if (res.status == 200) {
+            alert("OK");
+            this.$router.push("/courses");
+          } else if (res.status == 500) {
+            alert("fail");
+          }
+        })
         .catch((err) => {
           console.log(err);
         });
+    },
+
+    //フォームバリデーションチェック
+    checkForm() {
+      this.errors = [];
+      if (!this.emailVal) {
+        this.errors.push("メールアドレスを入力してください");
+      }
+      if (!this.emailIsValid(this.emailVal)) {
+        this.errors.push("メールアドレスの形式で入力してください");
+      }
+      if (!this.passwordVal) {
+        this.errors.push("パスワードを入力してください");
+      }
+      if (this.passwordVal.length < 8) {
+        this.errors.push("パスワードは8文字以上にしてください");
+      }
+    },
+
+    // メールアドレス形式チェック
+    emailIsValid(email) {
+      let emailRegexp =
+        /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/i;
+      return emailRegexp.test(email);
     },
   },
 };

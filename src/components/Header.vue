@@ -5,6 +5,11 @@
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">てっくらんど</span>
         <ul class="header-nav-list">
+          <router-link :to="{ name: 'courses' }">
+            <li class="courses-button">
+              <fa class="fas fa-sign-in" />コース一覧
+            </li>
+          </router-link>
           <router-link :to="{ name: 'toSignUp' }">
             <li class="sign-up-button">
               <fa class="fas fa-sign-in" />会員登録
@@ -66,6 +71,7 @@ export default {
   margin-bottom: 0;
   display: flex;
   font-weight: bolder;
+  .courses-button,
   .sign-up-button,
   .sign-in-button,
   .logout-button {

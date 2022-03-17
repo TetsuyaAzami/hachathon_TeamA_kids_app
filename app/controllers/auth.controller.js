@@ -13,10 +13,7 @@ exports.signup = async (req, res) => {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    res.json([
-      { message: "OK" }
-    ]);
-
+    res.json([{ message: "OK" }]);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -33,31 +30,39 @@ exports.signin = async (req, res) => {
       user.password
     );
     if (!user || !passwordIsValid) {
-      return res.json([{
-        message: "ERROR",
-      }]);
+      return res.json([
+        {
+          message: "ERROR",
+        },
+      ]);
     }
     const token = jwt.sign({ id: user.id }, config.secret, {
       expiresIn: 86400, // 24時間
     });
     req.session.token = token;
-    return res.status(200).json([{
-      id: user.id,
-      username: user.username,
-      email: user.email
-    }]);
+    return res.status(200).json([
+      {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      },
+    ]);
   } catch (error) {
-    return res.status(500).json([{
-      message: error.message 
-    }]);
+    return res.status(500).json([
+      {
+        message: error.message,
+      },
+    ]);
   }
 };
 exports.signout = async (req, res) => {
   try {
     req.session = null;
-    return res.status(200).json([{
-      message: "サインアウトしました"
-    }]);
+    return res.status(200).json([
+      {
+        message: "サインアウトしました",
+      },
+    ]);
   } catch (err) {
     this.next(err);
   }
