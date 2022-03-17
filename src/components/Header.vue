@@ -7,22 +7,22 @@
         <ul class="header-nav-list">
           <router-link :to="{ name: 'courses' }">
             <li class="courses-button">
-              <fa class="fas fa-sign-in" />コース一覧
+              <fa :icon="['fas', 'list']" />コース一覧
             </li>
           </router-link>
           <router-link :to="{ name: 'toSignUp' }">
             <li class="sign-up-button">
-              <fa class="fas fa-sign-in" />会員登録
+              <fa :icon="['fas', 'user-check']" />会員登録
             </li>
           </router-link>
           <router-link :to="{ name: 'topPage' }">
             <li class="sign-in-button">
-              <i class="fas fa-user-circle fa-lg"></i>ログイン
+              <fa :icon="['fas', 'right-to-bracket']" />ログイン
             </li>
           </router-link>
           <a href="/logout">
             <li class="logout-button">
-              <i class="fas fa-user-circle fa-lg"></i>ログアウト
+              <fa :icon="['fas', 'right-to-bracket']" />ログアウト
             </li>
           </a>
         </ul>
