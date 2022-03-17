@@ -7,10 +7,13 @@ import "bootstrap-vue/dist/bootstrap-vue.css"; // add
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import axios from "axios";
 import VueAxios from "vue-axios";
-//ルートコンポーネントのimport
 import App from "./App.vue";
-//routerファイルのimport
 import router from "./router";
+
+let axiosInstance = axios.create({
+  baseURL:
+    process.env.NODE_ENV !== "production" ? "http://localhost:3000/" : "",
+});
 
 //mock service workerの設定
 if (process.env.NODE_ENV === "development") {
@@ -19,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const app = createApp(App);
-app.use(VueAxios, axios);
+app.use(VueAxios, axiosInstance);
 app.use(router);
 app.component("fa", FontAwesomeIcon);
 app.mount("#app");
