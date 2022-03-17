@@ -97,6 +97,9 @@ export default {
         })
         .catch((err) => {
           console.log("エラー発生");
+          if (err) {
+            this.errors.push("違うメールアドレスを入力してね");
+          }
           console.log(err);
         });
     },

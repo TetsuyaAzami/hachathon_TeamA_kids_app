@@ -20,11 +20,11 @@
               <fa :icon="['fas', 'right-to-bracket']" />ログイン
             </li>
           </router-link>
-          <a href="/logout">
-            <li class="logout-button">
+          <span href="/signout" @click="signout">
+            <li class="signout-button">
               <fa :icon="['fas', 'right-to-bracket']" />ログアウト
             </li>
-          </a>
+          </span>
         </ul>
       </div>
     </nav>
@@ -40,6 +40,23 @@ export default {
   mounted() {
     this.path = this.$route.path;
     console.log(this.path);
+  },
+  methods: {
+    signout() {
+      this.axios
+        .post("/signout", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            this.$router.push("/");
+          }
+        })
+        .catch((err) => {
+          console.log("エラー発生");
+          console.log(err);
+        });
+    },
   },
 };
 </script>
@@ -74,7 +91,7 @@ export default {
   .courses-button,
   .sign-up-button,
   .sign-in-button,
-  .logout-button {
+  .signout-button {
     color: #fff;
   }
   .fas {
