@@ -18,7 +18,6 @@
               {{ error }}
             </li>
           </ul>
-          <span class="text-center errors">{{ errorMessage }}</span>
           <form>
             <input
               type="text"
@@ -69,17 +68,15 @@ export default {
       this.emailVal = $email.value;
       const $password = document.getElementById("password");
       this.passwordVal = $password.value;
-
       //バリデーションチェック
       this.checkForm();
       if (this.errors.length > 0) {
         this.isValid = false;
         return;
       }
-
       this.axios
         .post(
-          "http://0.0.0.0:3000/signin",
+          "/signin",
           {
             email: this.emailVal,
             password: this.passwordVal,
@@ -95,12 +92,10 @@ export default {
           if (res.status == 200) {
             alert("OK");
             this.$router.push("/courses");
-          } else if (res.status == 500) {
-            alert("fail");
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          this.errors.push("メールアドレスかパスワードが間違っています");
         });
     },
 
