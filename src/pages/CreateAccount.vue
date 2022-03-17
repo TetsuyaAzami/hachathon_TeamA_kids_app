@@ -78,7 +78,7 @@ export default {
 
       this.axios
         .post(
-          "http://0.0.0.0:3000/signup",
+          "/signup",
           {
             username: this.nameVal,
             email: this.emailVal,
