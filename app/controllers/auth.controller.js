@@ -8,14 +8,14 @@ const bcrypt = require("bcryptjs");
 exports.signup = async (req, res) => {
   //Userテーブルへ保存
   try {
-    const user = await User.create({
+    await User.create({
       username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    res.json([{ message: "OK" }]);
+    res.status(200).json();
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json();
   }
 };
 exports.signin = async (req, res) => {
@@ -30,7 +30,7 @@ exports.signin = async (req, res) => {
       user.password
     );
     if (!user || !passwordIsValid) {
-      return res.json([
+      return res.status(500).json([
         {
           message: "ERROR",
         },
@@ -40,6 +40,7 @@ exports.signin = async (req, res) => {
       expiresIn: 86400, // 24時間
     });
     req.session.token = token;
+    res.cookie("user", user.email, { maxAge: 60000, httpOnly: false });
     return res.status(200).json([
       {
         id: user.id,
