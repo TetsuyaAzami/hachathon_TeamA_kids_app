@@ -72,7 +72,6 @@ export default {
       //バリデーションチェック
       this.checkForm();
       if (this.errors.length > 0) {
-        this.isValid = false;
         return;
       }
 
@@ -91,8 +90,10 @@ export default {
           }
         )
         .then((res) => {
-          console.log("OK");
           console.log(res);
+          if (res.status == 200) {
+            this.$router.push("/");
+          }
         })
         .catch((err) => {
           console.log("エラー発生");
