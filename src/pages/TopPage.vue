@@ -13,7 +13,7 @@
         </div>
         <div class="login-form-area">
           <h2>ゲームをはじめよう</h2>
-          <ul v-show="!isValid">
+          <ul v-if="errors.length">
             <li v-for="error in errors" :key="error" class="text-center errors">
               {{ error }}
             </li>
@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       errors: [],
-      isValid: true,
       emailVal: "",
       passwordVal: "",
     };
@@ -71,10 +70,6 @@ export default {
       const $password = document.getElementById("password");
       this.passwordVal = $password.value;
 
-      //エラーメッセージ初期化
-      this.errors = [];
-      this.isValid = true;
-
       //バリデーションチェック
       this.checkForm();
       if (this.errors.length > 0) {
@@ -84,7 +79,7 @@ export default {
 
       this.axios
         .post(
-          "http://localhost:3000/signin",
+          "http://0.0.0.0:3000/signin",
           {
             email: this.emailVal,
             password: this.passwordVal,
@@ -97,13 +92,21 @@ export default {
         )
         .then((res) => {
           console.log(res);
+          if (res.status == 200) {
+            alert("OK");
+            this.$router.push("/courses");
+          } else if (res.status == 500) {
+            alert("fail");
+          }
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
     //フォームバリデーションチェック
     checkForm() {
+      this.errors = [];
       if (!this.emailVal) {
         this.errors.push("メールアドレスを入力してください");
       }

@@ -11,7 +11,7 @@
         </div>
         <div class="login-form-area">
           <h3>新しいアカウントを作る</h3>
-          <ul v-show="!isValid">
+          <ul v-show="errors.length">
             <li v-for="error in errors" :key="error" class="text-center errors">
               {{ error }}
             </li>
@@ -56,7 +56,6 @@ export default {
       nameVal: "",
       emailVal: "",
       passwordVal: "",
-      isValid: true, // 入力チェック結果
       errors: [], // エラーメッセージリスト
     };
   },
@@ -70,10 +69,6 @@ export default {
       const $password = document.getElementById("password");
       this.passwordVal = $password.value;
 
-      //エラーメッセージ初期化
-      this.errors = [];
-      this.isValid = true;
-
       //バリデーションチェック
       this.checkForm();
       if (this.errors.length > 0) {
@@ -83,7 +78,7 @@ export default {
 
       this.axios
         .post(
-          "http://localhost:3000/signup",
+          "http://0.0.0.0:3000/signup",
           {
             username: this.nameVal,
             email: this.emailVal,
@@ -107,6 +102,7 @@ export default {
 
     //フォームバリデーションチェック
     checkForm() {
+      this.errors = [];
       if (!this.nameVal) {
         this.errors.push("名前を入力してください");
       }
