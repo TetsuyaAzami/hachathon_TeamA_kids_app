@@ -71,7 +71,6 @@ export default {
       //バリデーションチェック
       this.checkForm();
       if (this.errors.length > 0) {
-        this.isValid = false;
         return;
       }
       this.axios
@@ -90,7 +89,6 @@ export default {
         .then((res) => {
           console.log(res);
           if (res.status == 200) {
-            alert("OK");
             this.$router.push("/courses");
           }
         })

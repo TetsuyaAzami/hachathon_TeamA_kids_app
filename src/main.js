@@ -3,13 +3,25 @@ import { createApp } from "vue";
 import "bootstrap/dist/css/bootstrap.css"; // add
 import "bootstrap-vue/dist/bootstrap-vue.css"; // add
 //FontAwesome
-// import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
+import { faList } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faRightToBracket);
+library.add(faUserCheck);
+library.add(faList);
+
+//axios
 import axios from "axios";
 import VueAxios from "vue-axios";
-import App from "./App.vue";
+//vue-router
 import router from "./router";
+//components
+import App from "./App.vue";
 
+//axiosの共通インスタンス
 let axiosInstance = axios.create({
   baseURL:
     process.env.NODE_ENV !== "production" ? "http://localhost:3000/" : "",
@@ -22,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const app = createApp(App);
+app.component("fa", FontAwesomeIcon);
 app.use(VueAxios, axiosInstance);
 app.use(router);
-app.component("fa", FontAwesomeIcon);
 app.mount("#app");
