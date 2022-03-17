@@ -4,6 +4,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 
 app.use(cors());
+app.use(express.static("dist"));
 //Content-type application/jsonに対応
 app.use(express.json());
 //Content-type application/x-www-form-urlencodedに対応
@@ -12,7 +13,7 @@ app.use(
   cookieSession({
     name: "kidsapp-session",
     secret: "COOKIE_SECRET",
-    httpOnly: true
+    httpOnly: true,
   })
 );
 
@@ -29,7 +30,7 @@ db.sequelize.sync({ force: true }).then(() => {
 
 //ルーティング
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Kids App"});
+  res.json({ message: "Welcome to Kids App" });
 });
 
 //routes

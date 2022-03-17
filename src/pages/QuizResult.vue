@@ -3,7 +3,7 @@
     <div class="container contents">
       <!-- コースタイトル -->
       <h2 class="contents-category">
-          <span>インターネットの仕組み</span>
+        <span>インターネットの仕組み</span>
       </h2>
       <div class="result-area">
         <!-- キャラクター画像 -->
@@ -40,11 +40,11 @@
           <div class="total-point">
             <h3>50 P</h3>
           </div>
-        </div> 
+        </div>
       </div>
-      <button type="butoon" class="btn">
-        コース一覧に戻る
-      </button>
+      <router-link :to="{ name: 'courses' }">
+        <button type="button" class="btn">コース一覧に戻る</button>
+      </router-link>
     </div>
   </main>
 </template>
@@ -107,9 +107,15 @@
       padding: 12px;
       width: 100%;
 
-      &.bg-orange {background-color: #ffb400;}
-      &.bg-blue {background-color: #0068b7;}
-      &.bg-red {background-color: #f55b23;}
+      &.bg-orange {
+        background-color: #ffb400;
+      }
+      &.bg-blue {
+        background-color: #0068b7;
+      }
+      &.bg-red {
+        background-color: #f55b23;
+      }
     }
   }
   .btn {
@@ -143,9 +149,9 @@
   }
 }
 span {
-   @media only screen and (max-width: 767px) {
-     margin: auto;
-     font-size: 1.5rem;
+  @media only screen and (max-width: 767px) {
+    margin: auto;
+    font-size: 1.5rem;
   }
 }
 h2:before {
@@ -190,5 +196,4 @@ h6 {
   padding: 12px 24px;
   color: #f55b23;
 }
-
 </style>
