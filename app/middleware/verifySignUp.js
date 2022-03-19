@@ -7,13 +7,16 @@ let checkDuplicateEmail = async (req, res, next) => {
     // Emailの重複確認
     let email = await User.findOne({
       where: {
-        email: req.body.email
-      }
+        email: req.body.email,
+      },
     });
-    if(email) {
-      return res.status(400).send([{
-        message: "違うメールアドレスを入力してね"
-      }]);
+    if (email) {
+      console.log(email);
+      return res.status(400).send([
+        {
+          message: "違うメールアドレスを入力してね",
+        },
+      ]);
     }
     next();
   } catch(error) {
@@ -24,7 +27,7 @@ let checkDuplicateEmail = async (req, res, next) => {
 };
 
 const verifySignUp = {
-  checkDuplicateEmail
+  checkDuplicateEmail,
 };
 
 module.exports = verifySignUp;

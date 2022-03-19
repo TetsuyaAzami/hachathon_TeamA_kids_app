@@ -13,7 +13,6 @@ exports.signup = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
     res.status(200).json();
-
   } catch (error) {
     res.status(500).json();
   }
@@ -46,17 +45,21 @@ exports.signin = async (req, res) => {
       sessionToken: token
     }]);
   } catch (error) {
-    return res.status(500).json([{
-      message: error.message 
-    }]);
+    return res.status(500).json([
+      {
+        message: error.message,
+      },
+    ]);
   }
 };
 exports.signout = async (req, res) => {
   try {
     req.session = null;
-    return res.status(200).json([{
-      message: "サインアウトしました"
-    }]);
+    return res.status(200).json([
+      {
+        message: "サインアウトしました",
+      },
+    ]);
   } catch (err) {
     this.next(err);
   }

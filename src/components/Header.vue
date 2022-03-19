@@ -5,21 +5,26 @@
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">てっくらんど</span>
         <ul class="header-nav-list">
+          <router-link :to="{ name: 'courses' }">
+            <li class="courses-button">
+              <fa :icon="['fas', 'list']" />コース一覧
+            </li>
+          </router-link>
           <router-link :to="{ name: 'toSignUp' }">
             <li class="sign-up-button">
-              <fa class="fas fa-sign-in" />会員登録
+              <fa :icon="['fas', 'user-check']" />会員登録
             </li>
           </router-link>
           <router-link :to="{ name: 'topPage' }">
             <li class="sign-in-button">
-              <i class="fas fa-user-circle fa-lg"></i>ログイン
+              <fa :icon="['fas', 'right-to-bracket']" />ログイン
             </li>
           </router-link>
-          <a href="/logout">
-            <li class="logout-button">
-              <i class="fas fa-user-circle fa-lg"></i>ログアウト
+          <span href="/signout" @click="signout">
+            <li class="signout-button">
+              <fa :icon="['fas', 'right-to-bracket']" />ログアウト
             </li>
-          </a>
+          </span>
         </ul>
       </div>
     </nav>
@@ -35,6 +40,23 @@ export default {
   mounted() {
     this.path = this.$route.path;
     console.log(this.path);
+  },
+  methods: {
+    signout() {
+      this.axios
+        .post("/signout", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            this.$router.push("/");
+          }
+        })
+        .catch((err) => {
+          console.log("エラー発生");
+          console.log(err);
+        });
+    },
   },
 };
 </script>
@@ -66,9 +88,10 @@ export default {
   margin-bottom: 0;
   display: flex;
   font-weight: bolder;
+  .courses-button,
   .sign-up-button,
   .sign-in-button,
-  .logout-button {
+  .signout-button {
     color: #fff;
   }
   .fas {

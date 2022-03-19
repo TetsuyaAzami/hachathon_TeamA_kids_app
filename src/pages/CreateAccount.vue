@@ -11,6 +11,11 @@
         </div>
         <div class="login-form-area">
           <h3>新しいアカウントを作る</h3>
+          <ul v-show="errors.length">
+            <li v-for="error in errors" :key="error" class="text-center errors">
+              {{ error }}
+            </li>
+          </ul>
           <form>
             <input
               type="username"
@@ -33,7 +38,7 @@
               placeholder="パスワードを入れてください"
               class="form-control"
             />
-            <button type="submit" class="sign-up-button" @click="signup">
+            <button type="button" class="sign-up-button" @click="signup">
               アカウントを登録
             </button>
           </form>
@@ -47,38 +52,83 @@
 export default {
   name: "create-acount",
   data() {
-    return {}
+    return {
+      nameVal: "",
+      emailVal: "",
+      passwordVal: "",
+      errors: [], // エラーメッセージリスト
+    };
   },
-    methods: {
+  methods: {
     signup() {
+      //DOM取得
       const $name = document.getElementById("username");
-      let nameVal = $name.value;
+      this.nameVal = $name.value;
       const $email = document.getElementById("email");
-      let emailVal = $email.value;
+      this.emailVal = $email.value;
       const $password = document.getElementById("password");
-      let passwordVal = $password.value;
-      console.log(nameVal);
-      console.log(emailVal);
-      console.log(passwordVal);
+      this.passwordVal = $password.value;
+
+      //バリデーションチェック
+      this.checkForm();
+      if (this.errors.length > 0) {
+        return;
+      }
+
       this.axios
-        .post("http://localhost:3000/signup", {
-          "username": nameVal,
-          "email": emailVal,
-          "password": passwordVal
-        }, 
-        {
-          headers: {
-            "Content-Type": "application/json"
+        .post(
+          "/signup",
+          {
+            username: this.nameVal,
+            email: this.emailVal,
+            password: this.passwordVal,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            this.$router.push("/");
           }
         })
-        .then((res) => {
-          console.log("OK");
-          console.log(res);
-        },)
         .catch((err) => {
           console.log("エラー発生");
+          if (err) {
+            this.errors.push("違うメールアドレスを入力してね");
+          }
           console.log(err);
         });
+    },
+
+    //フォームバリデーションチェック
+    checkForm() {
+      this.errors = [];
+      if (!this.nameVal) {
+        this.errors.push("名前を入力してください");
+      }
+      if (!this.emailVal) {
+        this.errors.push("メールアドレスを入力してください");
+      }
+      if (!this.emailIsValid(this.emailVal)) {
+        this.errors.push("メールアドレスの形式で入力してください");
+      }
+      if (!this.passwordVal) {
+        this.errors.push("パスワードを入力してください");
+      }
+      if (this.passwordVal.length < 8) {
+        this.errors.push("パスワードは8文字以上にしてください");
+      }
+    },
+
+    // メールアドレス形式チェック
+    emailIsValid(email) {
+      let emailRegexp =
+        /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/i;
+      return emailRegexp.test(email);
     },
   },
 };

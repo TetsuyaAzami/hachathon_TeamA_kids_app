@@ -2,10 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const app = express();
-// const cookieParser = require('cookie-parser');
 
 app.use(cors());
-// app.use(cookieParser())
+app.use(express.static("dist"));
+
 //Content-type application/jsonに対応
 app.use(express.json());
 //Content-type application/x-www-form-urlencodedに対応
@@ -21,7 +21,7 @@ app.use(
 
 //ルーティング
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Kids App"});
+  res.json({ message: "Welcome to Kids App" });
 });
 
 //routes
