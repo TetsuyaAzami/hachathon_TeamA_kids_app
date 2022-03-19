@@ -28,7 +28,7 @@ exports.addPoint = async (req, res) => {
         id: req.session.id,
       },
     });
-    user.point += req.body.point;
+    user.point += Number(req.body.point);
     user.update( {
       point: user.point
     });
