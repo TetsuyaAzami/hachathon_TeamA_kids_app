@@ -1,5 +1,5 @@
 const db = require("../models");
-const User = db.user;
+const User = db.User;
 
 //重複確認
 let checkDuplicateEmail = async (req, res, next) => {
@@ -19,12 +19,10 @@ let checkDuplicateEmail = async (req, res, next) => {
       ]);
     }
     next();
-  } catch (error) {
-    return res.status(400).send([
-      {
-        message: "メールアドレスを正しく入力してね",
-      },
-    ]);
+  } catch(error) {
+    return res.status(400).send([{
+      message:"メールアドレスを正しく入力してね"
+    }]);
   }
 };
 
