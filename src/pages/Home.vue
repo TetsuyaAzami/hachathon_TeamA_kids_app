@@ -59,7 +59,6 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data);
         this.courses = res.data.courses;
       })
       .catch((err) => {

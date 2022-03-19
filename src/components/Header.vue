@@ -3,7 +3,9 @@
   <header>
     <nav class="navbar navbar-dark header-nav-color">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">てっくらんど</span>
+        <router-link :to="{ name: 'courses' }">
+          <span class="navbar-brand mb-0 h1">てっくらんど</span>
+        </router-link>
         <ul class="header-nav-list">
           <router-link :to="{ name: 'courses' }">
             <li class="courses-button">

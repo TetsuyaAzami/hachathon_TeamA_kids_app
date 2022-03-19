@@ -5,12 +5,14 @@ exports.getPoint = async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.session.id,
+        id: 1,
       },
     });
-    return res.status(200).json([{
-      point: user.point
-    }])
+    return res.status(200).json([
+      {
+        point: user.point,
+      },
+    ]);
   } catch (error) {
     return res.status(500).json([
       {
@@ -25,7 +27,7 @@ exports.addPoint = async (req, res) => {
   try {
     const user = await User.findOne({
       where: {
-        id: req.session.id,
+        id: 1,
       },
     });
     user.point += Number(req.body.point);
@@ -34,9 +36,9 @@ exports.addPoint = async (req, res) => {
     });
     return res.status(200).json([
       {
-        point: user.point
-      }
-    ])
+        point: user.point,
+      },
+    ]);
   } catch (error) {
     return res.status(500).json([
       {
