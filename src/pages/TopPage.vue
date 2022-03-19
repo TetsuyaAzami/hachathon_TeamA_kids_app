@@ -92,7 +92,8 @@ export default {
             this.$router.push("/courses");
           }
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           this.errors.push("メールアドレスかパスワードが間違っています");
         });
     },
