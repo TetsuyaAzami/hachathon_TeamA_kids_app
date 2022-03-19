@@ -53,11 +53,13 @@ export default {
   },
   created() {
     this.axios
-      .get("http://localhost:8080/courses")
+      .get("/courses", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
-        console.log(res.data.courses[0].title);
-        console.log(this.courses);
-        this.courses = res.data.courses;
+        this.courses = res.data;
       })
       .catch((err) => {
         console.log("エラー発生");

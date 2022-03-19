@@ -94,7 +94,7 @@ export default {
   .signout-button {
     color: #fff;
   }
-  .fas {
+  svg {
     margin-right: 8px;
     line-height: 40px;
   }
