@@ -39,7 +39,7 @@
             <h6>合計ポイント</h6>
           </div>
           <div class="total-point">
-            <h3>50 P</h3>
+            <h3>{{ totalPoint }}P</h3>
           </div>
         </div>
       </div>
@@ -56,7 +56,19 @@ export default {
     return {
       point: localStorage.getItem("point"),
       correctCount: localStorage.getItem("correctCount"),
+      totalPoint: 0,
     };
+  },
+  async created() {
+    await this.axios
+      .get("/point")
+      .then((res) => {
+        this.totalPoint = res.data[0].point;
+      })
+      .catch((err) => {
+        console.log("エラーが発生しました");
+        console.log(err);
+      });
   },
 };
 </script>
