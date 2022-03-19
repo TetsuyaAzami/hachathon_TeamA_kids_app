@@ -16,7 +16,7 @@ const router = createRouter({
       component: QuizVue,
       name: "courseDetail",
     },
-    { path: "/result", component: QuizResultVue, name: "result"}
+    { path: "/result", component: QuizResultVue, name: "result", props: true },
   ],
 });
 
