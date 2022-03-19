@@ -5,6 +5,7 @@
       <h2 class="contents-category">
         <span>インターネットの仕組み</span>
       </h2>
+      <h1>{{ count }}</h1>
       <div class="result-area">
         <!-- キャラクター画像 -->
         <div class="img-wrapper">
@@ -20,7 +21,7 @@
             <h6>正解数</h6>
           </div>
           <div class="correct-answer">
-            <h3>3 問</h3>
+            <h3>{{ correctCount }} 問</h3>
           </div>
         </div>
         <!-- 獲得ポイント -->
@@ -29,7 +30,7 @@
             <h6>獲得ポイント</h6>
           </div>
           <div class="get-point">
-            <h3>30 P</h3>
+            <h3>{{ point }} P</h3>
           </div>
         </div>
         <!-- 合計ポイント -->
@@ -48,6 +49,17 @@
     </div>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      point: localStorage.getItem("point"),
+      correctCount: localStorage.getItem("correctCount"),
+    };
+  },
+};
+</script>
 
 <style scoped lang="scss">
 .contents {

@@ -19,11 +19,12 @@
           <span class="question-text">{{ quizNowData.question }} </span>
         </div>
         <!-- 答え -->
-        <div
+        <button
           class="answer-box"
           v-for="answer in quizNowData.Answers"
           :key="answer.id"
           @click="isAnswerTrue(answer)"
+          :disabled="!isButtonEnabled"
         >
           <span ref="`${answer}`" class="answer-text">{{ answer.answer }}</span>
           <!-- マルバツ画像 -->
@@ -39,7 +40,7 @@
               alt="判定マーク"
             />
           </div>
-        </div>
+        </button>
         <!-- 解説 -->
         <div ref="quizDescription" class="quiz-description hidden">
           <span>
@@ -70,29 +71,54 @@ export default {
   data() {
     return {
       count: 0,
-      point: 0,
+      correctPoint: 10,
       quizData: null,
       quizNowData: null,
       quizDescription: null,
       answerCheck: null,
+      isButtonEnabled: true,
     };
   },
   methods: {
     //答えのtrue,falseを判定して解説を表示
     isAnswerTrue(answer) {
-      console.log(answer);
       if (answer.is_answer == true) {
-        //
-      } else {
-        //
+        //localStrageのpointを追加
+        localStorage.setItem(
+          "point",
+          localStorage.getItem("point") == null
+            ? this.correctPoint
+            : parseInt(localStorage.getItem("point")) + this.correctPoint
+        );
+
+        //localStrageの正解数を追加
+        localStorage.setItem(
+          "correctCount",
+          localStorage.getItem("correctCount") == null
+            ? 1 //localStorageのcorrectCountがnullだった場合に正解したら正解数1
+            : parseInt(localStorage.getItem("correctCount")) + 1
+        );
+        console.log("lpoint: " + localStorage.getItem("point"));
+        console.log("lcorrectCount" + localStorage.getItem("correctCount"));
       }
       this.$refs.quizDescription.classList.remove("hidden");
       this.$refs.answerCheck[0].classList.remove("hidden");
       this.$refs.answerCheck[1].classList.remove("hidden");
+      //クイズの解答ボタンを複数回押せなくする
+      this.isButtonEnabled = false;
+      console.log(this.$refs.answerBox);
+      console.log("answerCheck");
     },
     // 次の問題へ
     toNextQuestion() {
+      if (this.count >= 3) {
+        this.$router.push({
+          name: "result",
+          params: { point: this.point, correctCount: this.correctCount },
+        });
+      }
       this.count++;
+      this.isButtonEnabled = true;
       this.$refs.quizDescription.classList.add("hidden");
       this.$refs.answerCheck[0].classList.add("hidden");
       this.$refs.answerCheck[1].classList.add("hidden");
@@ -100,6 +126,8 @@ export default {
     },
   },
   created() {
+    localStorage.clear();
+    this.count = 0;
     this.axios
       .get(`/courses/${this.$route.params.courseId}`, {
         headers: {
@@ -166,6 +194,7 @@ export default {
   .answer-box,
   .quiz-description {
     position: relative;
+    border: none;
     margin-bottom: 18px;
     padding: 12px 24px;
     font-size: 1.5em;
