@@ -59,7 +59,8 @@ export default {
         },
       })
       .then((res) => {
-        this.courses = res.data;
+        console.log(res.data);
+        this.courses = res.data.courses;
       })
       .catch((err) => {
         console.log("エラー発生");
