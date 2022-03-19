@@ -21,7 +21,7 @@
         <!-- 答え -->
         <div
           class="answer-box"
-          v-for="answer in quizNowData.answers"
+          v-for="answer in quizNowData.Answers"
           :key="answer.id"
           @click="isAnswerTrue(answer)"
         >
@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       count: 0,
+      point: 0,
       quizData: null,
       quizNowData: null,
       quizDescription: null,
@@ -79,6 +80,7 @@ export default {
   methods: {
     //答えのtrue,falseを判定して解説を表示
     isAnswerTrue(answer) {
+      console.log(answer);
       if (answer.is_answer == true) {
         //
       } else {
@@ -99,8 +101,13 @@ export default {
   },
   created() {
     this.axios
-      .get(`http://localhost:8080/courses/${this.$route.params.courseId}`)
+      .get(`/courses/${this.$route.params.courseId}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
+        console.log(res.data.quizzes);
         this.quizData = res.data.quizzes;
         this.quizNowData = res.data.quizzes[this.count];
       })
@@ -206,10 +213,10 @@ export default {
   font-weight: bold;
   color: #fff;
   @media only screen and (max-width: 991px) {
-    padding-top: 10px
+    padding-top: 10px;
   }
   @media only screen and (max-width: 767px) {
-    padding-top: 12px
+    padding-top: 12px;
   }
 }
 span {

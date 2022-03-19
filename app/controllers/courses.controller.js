@@ -2,6 +2,7 @@ const db = require("../models");
 
 exports.getAllCourses = async (req, res) => {
   // Sequelizeのモデルを使ってデータを取得する
+  console.log("a;llcourses");
   await db.Course.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -11,14 +12,13 @@ exports.getAllCourses = async (req, res) => {
       console.log("クイズデータを取得できませんでした");
       res.send("Error");
     } else {
-      res.json(courses);
+      res.json({ courses: courses });
     }
   });
 };
 
 exports.getCourse = async (req, res) => {
   const courseId = req.params.courseId;
-
   // Sequelizeのモデルを使ってデータを取得する
   await db.Quiz.findAll({
     where: {
@@ -38,7 +38,7 @@ exports.getCourse = async (req, res) => {
       console.log("クイズデータを取得できませんでした");
       res.send("Error");
     } else {
-      res.json({ courses: quizzes });
+      res.json({ quizzes: quizzes });
     }
   });
 };
