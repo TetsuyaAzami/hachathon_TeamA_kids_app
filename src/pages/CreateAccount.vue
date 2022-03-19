@@ -90,17 +90,14 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res);
           if (res.status == 200) {
             this.$router.push("/");
           }
         })
         .catch((err) => {
-          console.log("エラー発生");
           if (err) {
             this.errors.push("違うメールアドレスを入力してね");
           }
-          console.log(err);
         });
     },
 

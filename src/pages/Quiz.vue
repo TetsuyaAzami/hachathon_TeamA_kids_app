@@ -106,17 +106,32 @@ export default {
       this.$refs.answerCheck[1].classList.remove("hidden");
       //クイズの解答ボタンを複数回押せなくする
       this.isButtonEnabled = false;
-      console.log(this.$refs.answerBox);
-      console.log("answerCheck");
     },
     // 次の問題へ
     toNextQuestion() {
       if (this.count >= 3) {
+        this.axios
+          .post(
+            "/point",
+            {
+              point: localStorage.getItem("point"),
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then(() => {})
+          .catch((err) => {
+            console.log("エラーが発生しました");
+            console.log(err);
+          });
         this.$router.push({
           name: "result",
-          params: { point: this.point, correctCount: this.correctCount },
         });
       }
+      //問題番号のカウント
       this.count++;
       this.isButtonEnabled = true;
       this.$refs.quizDescription.classList.add("hidden");
