@@ -30,10 +30,9 @@ exports.addPoint = async (req, res) => {
         id: 1,
       },
     });
-    console.log(req.body.point);
-    user.point += req.body.point;
-    user.update({
-      point: user.point,
+    user.point += Number(req.body.point);
+    user.update( {
+      point: user.point
     });
     return res.status(200).json([
       {
