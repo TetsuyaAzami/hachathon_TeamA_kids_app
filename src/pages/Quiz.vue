@@ -155,7 +155,6 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data.quizzes);
         this.quizData = res.data.quizzes;
         this.quizNowData = res.data.quizzes[this.count];
       })
