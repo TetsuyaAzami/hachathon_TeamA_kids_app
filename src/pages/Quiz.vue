@@ -15,7 +15,9 @@
           <span>{{ quizNowData.title }}</span>
         </h2>
         <div class="question-box">
-          <h3 class="question-number">{{ "第" + quizNowData.id + "問" }}</h3>
+          <h3 class="question-number">
+            {{ "第" + (quizNowData.id - (quizData[0].id - 1)) + "問" }}
+          </h3>
           <span class="question-text">{{ quizNowData.question }} </span>
         </div>
         <!-- 答え -->
@@ -109,7 +111,7 @@ export default {
     },
     // 次の問題へ
     toNextQuestion() {
-      if (this.count >= 3) {
+      if (this.count >= this.quizData.length - 1) {
         this.axios
           .post(
             "/point",

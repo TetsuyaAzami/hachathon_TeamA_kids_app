@@ -1,8 +1,6 @@
 const db = require("../models");
 
 exports.getAllCourses = async (req, res) => {
-  // Sequelizeのモデルを使ってデータを取得する
-  console.log("a;llcourses");
   await db.Course.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -34,6 +32,7 @@ exports.getCourse = async (req, res) => {
       },
     ],
   }).then((quizzes) => {
+    console.log(quizzes);
     if (!quizzes) {
       console.log("クイズデータを取得できませんでした");
       res.send("Error");
