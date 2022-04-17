@@ -56,7 +56,7 @@ export default {
     return {
       point: localStorage.getItem("point"),
       correctCount: localStorage.getItem("correctCount"),
-      totalPoint: 0,
+      totalPoint: this.$route.params.point,
     };
   },
   async created() {

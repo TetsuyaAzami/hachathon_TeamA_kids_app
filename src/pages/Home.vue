@@ -30,7 +30,7 @@
             :to="{ name: 'courseDetail', params: { courseId: course.id } }"
           >
             <div class="card-body">
-              <h5 class="card-title">{{ course.title }}</h5>
+              <h5 class="card-title">{{ course.course_name }}</h5>
             </div>
             <div class="img-wrapper">
               <img

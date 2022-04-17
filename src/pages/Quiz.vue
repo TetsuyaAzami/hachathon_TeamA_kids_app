@@ -15,7 +15,9 @@
           <span>{{ quizNowData.title }}</span>
         </h2>
         <div class="question-box">
-          <h3 class="question-number">{{ "第" + quizNowData.id + "問" }}</h3>
+          <h3 class="question-number">
+            {{ "第" + (quizNowData.id - (quizData[0].id - 1)) + "問" }}
+          </h3>
           <span class="question-text">{{ quizNowData.question }} </span>
         </div>
         <!-- 答え -->
@@ -98,8 +100,6 @@ export default {
             ? 1 //localStorageのcorrectCountがnullだった場合に正解したら正解数1
             : parseInt(localStorage.getItem("correctCount")) + 1
         );
-        console.log("lpoint: " + localStorage.getItem("point"));
-        console.log("lcorrectCount" + localStorage.getItem("correctCount"));
       }
       this.$refs.quizDescription.classList.remove("hidden");
       this.$refs.answerCheck[0].classList.remove("hidden");
@@ -109,7 +109,7 @@ export default {
     },
     // 次の問題へ
     toNextQuestion() {
-      if (this.count >= 3) {
+      if (this.count >= this.quizData.length - 1) {
         this.axios
           .post(
             "/point",
@@ -122,14 +122,19 @@ export default {
               },
             }
           )
-          .then(() => {})
+          .then((res) => {
+            const point = res.data.point;
+            this.$router.push({
+              name: "result",
+              params: {
+                point: point,
+              },
+            });
+          })
           .catch((err) => {
             console.log("エラーが発生しました");
             console.log(err);
           });
-        this.$router.push({
-          name: "result",
-        });
       }
       //問題番号のカウント
       this.count++;

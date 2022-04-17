@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Course.init(
     {
-      title: DataTypes.STRING,
+      course_name: DataTypes.STRING,
       img: DataTypes.STRING,
     },
     {
