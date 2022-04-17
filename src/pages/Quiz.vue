@@ -100,8 +100,6 @@ export default {
             ? 1 //localStorageのcorrectCountがnullだった場合に正解したら正解数1
             : parseInt(localStorage.getItem("correctCount")) + 1
         );
-        console.log("lpoint: " + localStorage.getItem("point"));
-        console.log("lcorrectCount" + localStorage.getItem("correctCount"));
       }
       this.$refs.quizDescription.classList.remove("hidden");
       this.$refs.answerCheck[0].classList.remove("hidden");
@@ -124,14 +122,19 @@ export default {
               },
             }
           )
-          .then(() => {})
+          .then((res) => {
+            const point = res.data.point;
+            this.$router.push({
+              name: "result",
+              params: {
+                point: point,
+              },
+            });
+          })
           .catch((err) => {
             console.log("エラーが発生しました");
             console.log(err);
           });
-        this.$router.push({
-          name: "result",
-        });
       }
       //問題番号のカウント
       this.count++;
