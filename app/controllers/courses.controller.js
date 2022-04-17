@@ -32,7 +32,6 @@ exports.getCourse = async (req, res) => {
       },
     ],
   }).then((quizzes) => {
-    console.log(quizzes);
     if (!quizzes) {
       console.log("クイズデータを取得できませんでした");
       res.send("Error");
