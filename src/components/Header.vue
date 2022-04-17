@@ -41,7 +41,6 @@ export default {
   },
   mounted() {
     this.path = this.$route.path;
-    console.log(this.path);
   },
   methods: {
     signout() {
